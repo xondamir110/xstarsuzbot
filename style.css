@@ -263,4 +263,774 @@ button {
     justify-content: space-between;
 
     width: 220px;
-    margin-top
+    margin-top: 18px;
+    padding: 13px 16px;
+
+    border-radius: 15px;
+
+    background: linear-gradient(
+        135deg,
+        var(--gold2),
+        var(--gold)
+    );
+
+    color: #111;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    box-shadow:
+        0 10px 28px rgba(245, 197, 66, 0.18);
+
+    transition: 0.2s;
+}
+
+.main-btn span {
+    font-size: 20px;
+}
+
+.main-btn:active {
+    transform: scale(0.96);
+}
+
+.main-btn.full {
+    width: 100%;
+}
+
+
+/* ================= BALANCE ================= */
+
+.balance-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 14px;
+    padding: 17px 18px;
+
+    border-radius: 20px;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+
+    backdrop-filter: blur(18px);
+}
+
+.balance-card span {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.balance-card strong {
+    display: block;
+    margin-top: 5px;
+    font-size: 20px;
+}
+
+.balance-card button {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 13px;
+
+    background: rgba(245, 197, 66, 0.12);
+    color: var(--gold);
+
+    font-size: 25px;
+}
+
+
+/* ================= STATS ================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+
+    margin-top: 10px;
+}
+
+.stat-card {
+    padding: 15px 16px;
+
+    border-radius: 18px;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+}
+
+.stat-card span {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.stat-card b {
+    display: block;
+    margin-top: 5px;
+    font-size: 19px;
+}
+
+
+/* ================= TITLES ================= */
+
+.section-title {
+    margin: 24px 2px 11px;
+
+    font-size: 16px;
+    font-weight: 800;
+}
+
+
+/* ================= SERVICES ================= */
+
+.services {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.service-card {
+    min-height: 126px;
+
+    padding: 15px;
+
+    text-align: left;
+
+    border-radius: 20px;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+
+    transition:
+        transform 0.18s ease,
+        background 0.18s ease;
+}
+
+.service-card:active {
+    transform: scale(0.96);
+    background: var(--card2);
+}
+
+.service-icon {
+    width: 43px;
+    height: 43px;
+
+    margin-bottom: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.stars-icon {
+    background: rgba(245, 197, 66, 0.14);
+    color: var(--gold);
+}
+
+.premium-icon {
+    background: rgba(255, 255, 255, 0.10);
+    color: var(--text);
+}
+
+.gift-icon {
+    background: rgba(255, 120, 170, 0.10);
+    color: #ff78aa;
+}
+
+.nft-icon {
+    background: rgba(140, 120, 255, 0.12);
+    color: #9b8cff;
+}
+
+.post-icon {
+    background: rgba(70, 190, 255, 0.11);
+    color: #65caff;
+}
+
+.ton-icon {
+    background: rgba(60, 160, 255, 0.12);
+    color: #55aaff;
+}
+
+.number-icon {
+    background: rgba(90, 220, 160, 0.11);
+    color: #5bdca4;
+}
+
+.service-card strong {
+    display: block;
+    font-size: 14px;
+}
+
+.service-card span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--muted);
+    font-size: 10px;
+}
+
+
+/* ================= GAMES ================= */
+
+.games {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.games button,
+.profile-menu button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    width: 100%;
+    padding: 13px 14px;
+
+    border-radius: 17px;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+
+    text-align: left;
+}
+
+.games button > span,
+.profile-menu button > span {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: rgba(245, 197, 66, 0.09);
+    color: var(--gold);
+
+    font-size: 18px;
+}
+
+.games button div,
+.profile-menu button div {
+    flex: 1;
+}
+
+.games strong,
+.profile-menu strong {
+    display: block;
+    font-size: 13px;
+}
+
+.games small,
+.profile-menu small {
+    display: block;
+    margin-top: 3px;
+
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.games button > b,
+.profile-menu button > b {
+    color: var(--muted);
+    font-size: 21px;
+}
+
+
+/* ================= PAGE HEADER ================= */
+
+.page-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 18px;
+}
+
+.page-header > button {
+    width: 43px;
+    height: 43px;
+
+    border-radius: 14px;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+
+    font-size: 28px;
+}
+
+.page-header h2 {
+    font-size: 18px;
+}
+
+.page-header span,
+.simple-header span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.simple-header {
+    margin: 5px 2px 18px;
+}
+
+.simple-header h2 {
+    font-size: 23px;
+}
+
+
+/* ================= SERVICE BANNER ================= */
+
+.service-banner {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 20px;
+
+    border-radius: 23px;
+
+    border: 1px solid var(--border);
+}
+
+.stars-banner {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(245, 197, 66, 0.15),
+            rgba(255, 255, 255, 0.03)
+        );
+}
+
+.premium-banner {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.10),
+            rgba(255, 255, 255, 0.025)
+        );
+}
+
+.big-service-icon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 19px;
+
+    background: rgba(245, 197, 66, 0.12);
+
+    color: var(--gold);
+
+    font-size: 29px;
+    font-weight: 900;
+}
+
+.service-banner h1 {
+    font-size: 23px;
+}
+
+.service-banner p {
+    margin-top: 4px;
+
+    color: var(--muted);
+    font-size: 11px;
+}
+
+
+/* ================= PACKAGES ================= */
+
+.packages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.package {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    padding: 16px;
+
+    border-radius: 19px;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+
+    text-align: left;
+
+    transition: 0.18s;
+}
+
+.package:active {
+    transform: scale(0.97);
+}
+
+.package div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.package-star {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: rgba(245, 197, 66, 0.12);
+
+    color: var(--gold);
+    font-size: 19px;
+}
+
+.package strong {
+    display: block;
+    font-size: 14px;
+}
+
+.package span {
+    display: block;
+    margin-top: 3px;
+
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.package > b {
+    color: var(--gold);
+    font-size: 11px;
+}
+
+
+/* ================= EMPTY ================= */
+
+.empty-service {
+    min-height: 300px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 30px;
+}
+
+.empty-service > div {
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 17px;
+
+    border-radius: 23px;
+
+    background: rgba(245, 197, 66, 0.10);
+
+    color: var(--gold);
+
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.empty-service h2 {
+    font-size: 17px;
+}
+
+.empty-service p {
+    margin-top: 7px;
+
+    max-width: 250px;
+
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 18px;
+}
+
+
+/* ================= BALANCE PAGE ================= */
+
+.balance-big {
+    padding: 25px;
+
+    border-radius: 23px;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+
+    text-align: center;
+}
+
+.balance-big span {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.balance-big strong {
+    display: block;
+    margin-top: 8px;
+
+    color: var(--gold);
+
+    font-size: 29px;
+}
+
+
+/* ================= PROFILE ================= */
+
+.profile-card {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    padding: 18px;
+
+    border-radius: 21px;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+}
+
+.profile-avatar {
+    width: 54px;
+    height: 54px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background: linear-gradient(
+        135deg,
+        var(--gold2),
+        var(--gold)
+    );
+
+    color: #111;
+
+    font-size: 23px;
+    font-weight: 900;
+}
+
+.profile-card strong {
+    display: block;
+    font-size: 15px;
+}
+
+.profile-card span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.profile-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+
+    margin-top: 12px;
+}
+
+
+/* ================= BOTTOM NAV ================= */
+
+.bottom-nav {
+    position: fixed;
+
+    left: 50%;
+    bottom: 10px;
+
+    transform: translateX(-50%);
+
+    width: calc(100% - 22px);
+    max-width: 535px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    padding: 7px;
+
+    border-radius: 22px;
+
+    background: rgba(20, 20, 20, 0.86);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(22px);
+
+    box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.35);
+
+    z-index: 100;
+}
+
+body.light .bottom-nav {
+    background: rgba(255, 255, 255, 0.88);
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 3px;
+
+    min-height: 53px;
+
+    border-radius: 16px;
+
+    background: transparent;
+
+    color: var(--muted);
+
+    transition: 0.2s;
+}
+
+.nav-item span {
+    font-size: 19px;
+    line-height: 20px;
+}
+
+.nav-item small {
+    font-size: 9px;
+}
+
+.nav-item.active {
+    background: rgba(245, 197, 66, 0.11);
+    color: var(--gold);
+}
+
+.nav-item:active {
+    transform: scale(0.91);
+}
+
+
+/* ================= TOAST ================= */
+
+.toast {
+    position: fixed;
+
+    left: 50%;
+    bottom: 82px;
+
+    transform:
+        translateX(-50%)
+        translateY(20px);
+
+    max-width: calc(100% - 40px);
+
+    padding: 12px 17px;
+
+    border-radius: 14px;
+
+    background: rgba(25, 25, 25, 0.94);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+
+    color: white;
+
+    font-size: 12px;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: 0.25s;
+
+    z-index: 300;
+}
+
+.toast.show {
+    opacity: 1;
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+
+/* ================= LIGHT MODE ================= */
+
+body.light .hero {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+body.light .package,
+body.light .service-card,
+body.light .balance-card,
+body.light .stat-card,
+body.light .games button,
+body.light .profile-menu button,
+body.light .profile-card,
+body.light .balance-big {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.035);
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 380px) {
+
+    .app {
+        padding-left: 11px;
+        padding-right: 11px;
+    }
+
+    .hero {
+        padding: 22px 19px;
+    }
+
+    .hero h1 {
+        font-size: 26px;
+    }
+
+    .hero-icon {
+        width: 62px;
+        height: 62px;
+        right: 20px;
+        bottom: 22px;
+    }
+
+    .service-card {
+        min-height: 118px;
+        padding: 13px;
+    }
+
+    .main-btn {
+        width: 205px;
+    }
+    }
