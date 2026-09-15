@@ -1,1419 +1,456 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width,
-initial-scale=1.0,
-maximum-scale=1.0,
-user-scalable=no">
-
-<meta name="theme-color" content="#08090b">
-
-<title>X Stars Uz</title>
-
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-<style>
-
-/* =====================================================
-   X STARS UZ — COMPLETE DESIGN
-   ===================================================== */
-
-*{
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
-}
-
-:root{
-    --bg:#08090b;
-    --card:#111419;
-    --card2:#151920;
-    --border:rgba(255,255,255,.08);
-
-    --text:#ffffff;
-    --muted:#8b9099;
-
-    --gold:#ffd21c;
-    --gold2:#ffad00;
-
-    --blue:#5d7cff;
-    --green:#39d98a;
-
-    --shadow:0 15px 45px rgba(0,0,0,.35);
-}
-
-body.light{
-    --bg:#f3f5f7;
-    --card:#ffffff;
-    --card2:#f7f8fa;
-    --border:rgba(0,0,0,.08);
-
-    --text:#111317;
-    --muted:#7d828b;
-
-    --shadow:0 12px 35px rgba(0,0,0,.10);
-}
-
-html,
-body{
-    margin:0;
-    padding:0;
-    width:100%;
-    min-height:100%;
-    background:var(--bg);
-    color:var(--text);
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
-    transition:
-        background .3s ease,
-        color .3s ease;
-}
-
-body{
-    overflow-x:hidden;
-}
-
-button{
-    font-family:inherit;
-    color:inherit;
-}
-
-.app{
-    width:100%;
-    max-width:520px;
-    min-height:100vh;
-    margin:auto;
-    padding-bottom:90px;
-}
-
-/* =====================================================
-   TOPBAR
-   ===================================================== */
-
-.topbar{
-    height:76px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:14px 18px;
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.brand-logo{
-    width:45px;
-    height:45px;
-    border-radius:15px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:
-        linear-gradient(145deg,#171a20,#08090b);
-
-    border:1px solid var(--border);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X Stars Uz</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="brand">
+            <div class="brand-logo">X</div>
+            <div>
+                <h2>X Stars Uz</h2>
+                <span>Telegram xizmatlari</span>
+            </div>
+        </div>
+
+        <button class="theme-btn" onclick="toggleTheme()">☼</button>
+    </header>
+
 
-    box-shadow:
-        0 0 25px rgba(255,210,28,.12);
-}
-
-.brand-logo span{
-    font-size:25px;
-    font-weight:900;
-    color:var(--gold);
-}
-
-.brand-name{
-    font-size:16px;
-    font-weight:800;
-}
-
-.brand-sub{
-    margin-top:3px;
-    font-size:11px;
-    color:var(--muted);
-}
-
-.icon-btn{
-    width:43px;
-    height:43px;
-
-    border:1px solid var(--border);
-    border-radius:14px;
-
-    background:var(--card);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    cursor:pointer;
-
-    transition:.2s;
-}
-
-.icon-btn:active{
-    transform:scale(.91);
-}
-
-.icon-btn svg{
-    width:21px;
-    height:21px;
-    fill:none;
-    stroke:currentColor;
-    stroke-width:1.8;
-}
-
-/* =====================================================
-   HERO
-   ===================================================== */
-
-.hero{
-    position:relative;
-    overflow:hidden;
-
-    margin:5px 16px 16px;
-
-    min-height:230px;
-
-    padding:25px;
-
-    border-radius:27px;
-
-    border:1px solid var(--border);
-
-    background:
-        radial-gradient(
-            circle at 85% 40%,
-            rgba(255,210,28,.18),
-            transparent 32%
-        ),
-        linear-gradient(
-            145deg,
-            var(--card),
-            var(--card2)
-        );
-
-    box-shadow:var(--shadow);
-}
-
-.hero-content{
-    position:relative;
-    z-index:2;
-    max-width:290px;
-}
-
-.hero-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-
-    padding:7px 10px;
-
-    border-radius:10px;
-
-    background:rgba(255,210,28,.09);
-
-    color:var(--gold);
-
-    font-size:10px;
-    font-weight:800;
-}
-
-.mini-star{
-    font-size:12px;
-}
-
-.hero h1{
-    margin:14px 0 9px;
-
-    font-size:28px;
-    line-height:1.08;
-    letter-spacing:-1px;
-}
-
-.hero h1 span{
-    color:var(--gold);
-}
-
-.hero p{
-    margin:0;
-
-    color:var(--muted);
-
-    font-size:12px;
-    line-height:1.55;
-}
-
-.primary-btn{
-    margin-top:18px;
-
-    border:0;
-
-    padding:13px 17px;
-
-    border-radius:14px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--gold),
-            var(--gold2)
-        );
-
-    color:#08090b;
-
-    font-size:12px;
-    font-weight:900;
-
-    cursor:pointer;
-
-    box-shadow:
-        0 10px 25px rgba(255,174,0,.18);
-
-    transition:.2s;
-}
-
-.primary-btn span{
-    margin-left:8px;
-    font-size:15px;
-}
-
-.primary-btn:active{
-    transform:scale(.95);
-}
-
-.hero-star{
-    position:absolute;
-
-    right:15px;
-    top:48px;
-
-    width:150px;
-    height:150px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.big-star{
-    font-size:110px;
-    line-height:1;
-
-    color:var(--gold);
-
-    filter:
-        drop-shadow(
-            0 0 22px rgba(255,210,28,.45)
-        );
-
-    animation:floatStar 3s ease-in-out infinite;
-}
-
-@keyframes floatStar{
-    0%,100%{
-        transform:translateY(0) rotate(0deg);
-    }
-
-    50%{
-        transform:translateY(-9px) rotate(3deg);
-    }
-}
-
-.orbit{
-    position:absolute;
-
-    border:1px solid rgba(255,210,28,.18);
-
-    border-radius:50%;
-
-    width:145px;
-    height:55px;
-
-    transform:rotate(-25deg);
-}
-
-.orbit-2{
-    transform:rotate(45deg);
-}
-
-/* =====================================================
-   BALANCE
-   ===================================================== */
-
-.balance-card{
-    margin:0 16px 15px;
-
-    padding:18px;
-
-    border-radius:22px;
-
-    border:1px solid var(--border);
-
-    background:var(--card);
-
-    box-shadow:var(--shadow);
-}
-
-.balance-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.small-title{
-    font-size:10px;
-    font-weight:800;
-    color:var(--muted);
-    letter-spacing:.5px;
-}
-
-.balance-number{
-    margin-top:4px;
-
-    font-size:24px;
-    font-weight:900;
-}
-
-.balance-number span{
-    font-size:12px;
-    color:var(--muted);
-    font-weight:600;
-}
-
-.balance-icon{
-    width:43px;
-    height:43px;
-
-    border-radius:13px;
-
-    background:rgba(255,210,28,.10);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    color:var(--gold);
-}
-
-.balance-icon svg{
-    width:21px;
-    height:21px;
-
-    fill:none;
-    stroke:currentColor;
-    stroke-width:1.7;
-}
-
-.balance-actions{
-    display:flex;
-    gap:9px;
-    margin-top:15px;
-}
-
-.balance-actions button{
-    flex:1;
-
-    padding:12px;
-
-    border-radius:13px;
-
-    font-size:12px;
-    font-weight:800;
-
-    cursor:pointer;
-}
-
-.light-btn{
-    border:0;
-
-    background:var(--gold);
-    color:#08090b;
-}
-
-.dark-btn{
-    border:1px solid var(--border);
-
-    background:var(--card2);
-}
-
-.balance-actions button:active{
-    transform:scale(.96);
-}
-
-/* =====================================================
-   STATS
-   ===================================================== */
-
-.stats{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-
-    margin:0 16px 20px;
-}
-
-.stat-card{
-    min-height:65px;
-
-    padding:12px;
-
-    display:flex;
-    align-items:center;
-    gap:10px;
-
-    border-radius:17px;
-
-    background:var(--card);
-
-    border:1px solid var(--border);
-}
-
-.stat-icon{
-    width:38px;
-    height:38px;
-
-    border-radius:12px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:20px;
-}
-
-.star-icon{
-    color:var(--gold);
-    background:rgba(255,210,28,.10);
-}
-
-.crown-icon{
-    background:rgba(94,85,255,.12);
-    color:#8d83ff;
-}
-
-.crown-icon svg{
-    width:21px;
-    height:21px;
-
-    fill:none;
-    stroke:currentColor;
-    stroke-width:1.7;
-}
-
-.stat-card span{
-    display:block;
-    font-size:12px;
-    font-weight:800;
-}
-
-.stat-card small{
-    display:block;
-    margin-top:3px;
-
-    font-size:9px;
-    color:var(--muted);
-}
-
-/* =====================================================
-   SECTIONS
-   ===================================================== */
-
-.section{
-    margin:0 16px 20px;
-}
-
-.section-title{
-    margin:0 0 10px;
-
-    font-size:11px;
-    font-weight:900;
-
-    color:var(--muted);
-    letter-spacing:.7px;
-}
-
-/* =====================================================
-   SERVICES
-   ===================================================== */
-
-.service-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:9px;
-}
-
-.service-card{
-    min-height:105px;
-
-    padding:12px 7px;
-
-    border-radius:17px;
-
-    border:1px solid var(--border);
-
-    background:
-        linear-gradient(
-            145deg,
-            var(--card),
-            var(--card2)
-        );
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
-
-    cursor:pointer;
-
-    transition:.2s;
-}
-
-.service-card:active{
-    transform:scale(.94);
-    border-color:rgba(255,210,28,.4);
-}
-
-.service-icon{
-    width:40px;
-    height:40px;
-
-    margin-bottom:7px;
-
-    border-radius:12px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:rgba(255,210,28,.08);
-
-    color:var(--gold);
-}
-
-.service-icon svg{
-    width:22px;
-    height:22px;
-
-    fill:none;
-    stroke:currentColor;
-    stroke-width:1.6;
-}
-
-.service-card strong{
-    font-size:11px;
-}
-
-.service-card small{
-    margin-top:3px;
-
-    color:var(--muted);
-
-    font-size:8px;
-}
-
-/* =====================================================
-   LIST
-   ===================================================== */
-
-.list{
-    display:flex;
-    flex-direction:column;
-}
-
-.list-item{
-    display:flex;
-    align-items:center;
-
-    width:100%;
-
-    padding:12px 7px;
-
-    border:0;
-    border-bottom:1px solid var(--border);
-
-    background:transparent;
-
-    text-align:left;
-
-    cursor:pointer;
-
-    transition:.2s;
-}
-
-.list-item:last-child{
-    border-bottom:0;
-}
-
-.list-item:active{
-    transform:scale(.98);
-}
-
-.list-icon{
-    width:39px;
-    height:39px;
-
-    margin-right:10px;
-
-    flex-shrink:0;
-
-    border-radius:12px;
-
-    background:var(--card);
-
-    border:1px solid var(--border);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    color:var(--gold);
-}
-
-.list-item strong{
-    display:block;
-    font-size:11px;
-}
-
-.list-item small{
-    display:block;
-    margin-top:3px;
-
-    color:var(--muted);
-
-    font-size:9px;
-}
-
-.arrow{
-    margin-left:auto;
-
-    font-size:22px;
-
-    color:var(--muted);
-}
-
-/* =====================================================
-   PAGES
-   ===================================================== */
-
-.page{
-    padding:15px 16px;
-}
-
-.hidden{
-    display:none !important;
-}
-
-.page-header{
-    margin-bottom:20px;
-}
-
-.page-header h2{
-    margin:0;
-    font-size:25px;
-}
-
-.page-header p{
-    margin:6px 0 0;
-
-    color:var(--muted);
-    font-size:12px;
-}
-
-.empty-state{
-    padding:55px 20px;
-
-    text-align:center;
-
-    border-radius:22px;
-
-    border:1px solid var(--border);
-
-    background:var(--card);
-}
-
-.empty-icon{
-    font-size:40px;
-    color:var(--gold);
-}
-
-.empty-state h3{
-    margin:12px 0 6px;
-}
-
-.empty-state p{
-    margin:0;
-
-    color:var(--muted);
-    font-size:12px;
-}
-
-/* =====================================================
-   PROFILE
-   ===================================================== */
-
-.profile-card{
-    padding:25px 18px;
-
-    border-radius:23px;
-
-    background:var(--card);
-
-    border:1px solid var(--border);
-
-    text-align:center;
-}
-
-.profile-avatar{
-    width:70px;
-    height:70px;
-
-    margin:auto;
-
-    border-radius:22px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:#08090b;
-
-    color:var(--gold);
-
-    font-size:32px;
-    font-weight:900;
-}
-
-.profile-card h2{
-    margin:13px 0 3px;
-    font-size:18px;
-}
-
-.profile-card p{
-    margin:0;
-    color:var(--muted);
-    font-size:12px;
-}
-
-.profile-stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-
-    margin-top:22px;
-
-    border-top:1px solid var(--border);
-    padding-top:17px;
-}
-
-.profile-stats strong{
-    display:block;
-    font-size:16px;
-}
-
-.profile-stats small{
-    color:var(--muted);
-    font-size:9px;
-}
-
-.settings{
-    margin-top:15px;
-
-    background:var(--card);
-
-    border:1px solid var(--border);
-
-    border-radius:20px;
-
-    overflow:hidden;
-}
-
-.setting{
-    width:100%;
-
-    display:flex;
-    align-items:center;
-
-    gap:11px;
-
-    padding:14px;
-
-    border:0;
-    border-bottom:1px solid var(--border);
-
-    background:transparent;
-
-    text-align:left;
-
-    cursor:pointer;
-}
-
-.setting:last-child{
-    border-bottom:0;
-}
-
-.setting > span{
-    width:37px;
-    height:37px;
-
-    border-radius:11px;
-
-    background:var(--card2);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    color:var(--gold);
-}
-
-.setting div{
-    flex:1;
-}
-
-.setting strong{
-    display:block;
-    font-size:11px;
-}
-
-.setting small{
-    display:block;
-
-    margin-top:3px;
-
-    color:var(--muted);
-
-    font-size:9px;
-}
-
-.setting b{
-    color:var(--muted);
-    font-size:20px;
-}
-
-/* =====================================================
-   BOTTOM NAV
-   ===================================================== */
-
-.bottom-nav{
-    position:fixed;
-
-    z-index:50;
-
-    left:50%;
-    bottom:0;
-
-    transform:translateX(-50%);
-
-    width:min(520px,100%);
-
-    height:76px;
-
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-
-    padding:8px 7px;
-
-    background:
-        color-mix(
-            in srgb,
-            var(--bg) 91%,
-            transparent
-        );
-
-    backdrop-filter:blur(18px);
-
-    border-top:1px solid var(--border);
-}
-
-.nav{
-    border:0;
-    background:transparent;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-
-    gap:4px;
-
-    color:var(--muted);
-
-    cursor:pointer;
-
-    transition:.2s;
-}
-
-.nav span{
-    width:31px;
-    height:31px;
-
-    border-radius:11px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.nav svg{
-    width:20px;
-    height:20px;
-
-    fill:none;
-    stroke:currentColor;
-    stroke-width:1.7;
-}
-
-.nav small{
-    font-size:9px;
-    font-weight:700;
-}
-
-.nav.active{
-    color:var(--gold);
-}
-
-.nav.active span{
-    background:rgba(255,210,28,.09);
-}
-
-.nav:active{
-    transform:scale(.91);
-}
-
-/* =====================================================
-   MODAL
-   ===================================================== */
-
-.modal{
-    position:fixed;
-
-    z-index:100;
-
-    inset:0;
-
-    display:flex;
-    align-items:flex-end;
-
-    background:rgba(0,0,0,.72);
-
-    backdrop-filter:blur(7px);
-
-    opacity:0;
-    pointer-events:none;
-
-    transition:.25s;
-}
-
-.modal.active{
-    opacity:1;
-    pointer-events:auto;
-}
-
-.modal-inner{
-    width:100%;
-    max-width:520px;
-
-    max-height:92vh;
-
-    overflow-y:auto;
-
-    margin:auto auto 0;
-
-    padding:25px 18px 30px;
-
-    border-radius:28px 28px 0 0;
-
-    background:var(--bg);
-
-    border:1px solid var(--border);
-
-    transform:translateY(30px);
-
-    transition:.3s;
-}
-
-.modal.active .modal-inner{
-    transform:translateY(0);
-}
-
-.close-btn{
-    position:absolute;
-
-    right:16px;
-    top:15px;
-
-    width:42px;
-    height:42px;
-
-    border:0;
-    border-radius:50%;
-
-    background:var(--card2);
-
-    font-size:27px;
-
-    cursor:pointer;
-}
-
-.modal-logo{
-    width:70px;
-    height:70px;
-
-    margin:5px auto 13px;
-
-    border-radius:22px;
-
-    background:#08090b;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    color:var(--gold);
-
-    font-size:38px;
-
-    box-shadow:
-        0 0 35px rgba(255,210,28,.12);
-}
-
-.modal-inner h2{
-    margin:0;
-
-    text-align:center;
-
-    font-size:26px;
-}
-
-.modal-inner > p{
-    margin:7px 0 20px;
-
-    text-align:center;
-
-    color:var(--muted);
-
-    font-size:12px;
-}
-
-/* =====================================================
-   STARS PACKAGES
-   ===================================================== */
-
-.stars-packages{
-    display:flex;
-    flex-direction:column;
-    gap:9px;
-}
-
-.stars-package{
-    position:relative;
-
-    width:100%;
-
-    min-height:70px;
-
-    padding:10px;
-
-    display:flex;
-    align-items:center;
-
-    border-radius:18px;
-
-    border:1px solid var(--border);
-
-    background:var(--card);
-
-    text-align:left;
-
-    cursor:pointer;
-
-    transition:.18s;
-}
-
-.stars-package:active{
-    transform:scale(.97);
-}
-
-.stars-package.selected{
-    border-color:var(--gold);
-
-    box-shadow:
-        0 0 0 1px rgba(255,210,28,.18),
-        0 8px 25px rgba(255,210,28,.08);
-}
-
-.package-star{
-    width:47px;
-    height:47px;
-
-    flex-shrink:0;
-
-    margin-right:11px;
-
-    border-radius:15px;
-
-    background:#08090b;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    color:var(--gold);
-
-    font-size:25px;
-
-    box-shadow:
-        inset 0 0 20px rgba(255,210,28,.04);
-}
-
-.package-info{
-    flex:1;
-}
-
-.package-info strong{
-    display:block;
-
-    font-size:14px;
-}
-
-.package-info span{
-    display:block;
-
-    margin-top:4px;
-
-    color:var(--muted);
-
-    font-size:11px;
-}
-
-.package-arrow{
-    width:39px;
-    height:39px;
-
-    border-radius:13px;
-
-    background:var(--gold);
-
-    color:#08090b;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:19px;
-    font-weight:900;
-}
-
-.popular-badge{
-    position:absolute;
-
-    right:58px;
-    top:-7px;
-
-    padding:4px 7px;
-
-    border-radius:7px;
-
-    background:var(--gold);
-
-    color:#08090b;
-
-    font-size:8px;
-    font-weight:900;
-}
-
-/* =====================================================
-   PREMIUM
-   ===================================================== */
-
-.premium-benefits{
-    padding:15px;
-
-    border-radius:19px;
-
-    background:var(--card);
-
-    border:1px solid var(--border);
-
-    margin-bottom:18px;
-}
-
-.benefit{
-    display:flex;
-    align-items:center;
-    gap:9px;
-
-    padding:6px 0;
-
-    font-size:11px;
-}
-
-.check{
-    width:20px;
-    height:20px;
-
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:rgba(93,124,255,.15);
-
-    color:#7790ff;
-
-    font-size:11px;
-}
-
-.premium-packages{
-    display:flex;
-    flex-direction:column;
-    gap:9px;
-}
-
-.premium-option{
-    width:100%;
-
-    display:flex;
-    align-items:center;
-
-    padding:14px;
-
-    border-radius:17px;
-
-    border:1px solid var(--border);
-
-    background:var(--card);
-
-    cursor:pointer;
-
-    text-align:left;
-}
-
-.premium-option.selected{
-    border-color:var(--gold);
-}
-
-.premium-radio{
-    width:22px;
-    height:22px;
-
-    margin-right:11px;
-
-    border-radius:50%;
-
-    border:2px solid var(--muted);
-}
-
-.premium-option.selected .premium-radio{
-    border:6px solid var(--gold);
-}
-
-.premium-option div:nth-child(2){
-    flex:1;
-}
-
-.premium-option strong{
-    display:block;
-    font-size:12px;
-}
-
-.premium-option small{
-    display:block;
-    margin-top:3px;
-    color:var(--muted);
-}
-
-.premium-price{
-    font-size:12px;
-    font-weight:800;
-}
-
-/* =====================================================
-   TOAST
-   ===================================================== */
-
-.toast{
-    position:fixed;
-
-    z-index:200;
-
-    left:50%;
-    bottom:92px;
-
-    transform:
-        translate(-50%,15px);
-
-    padding:11px 16px;
-
-    border-radius:13px;
-
-    background:#191c22;
-
-    color:#fff;
-
-    border:1px solid var(--border);
-
-    font-size:11px;
-    font-weight:700;
-
-    opacity:0;
-    pointer-events:none;
-
-    transition:.25s;
-}
-
-.toast.show{
-    opacity:1;
-
-    transform:
-        translate(-50%,0);
-}
-
-/* =====================================================
-   LIGHT MODE
-   ===================================================== */
-
-body.light .hero{
-    background:
-        radial-gradient(
-            circle at 85% 40%,
-            rgba(255,210,28,.22),
-            transparent 32%
-        ),
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #edf2f7
-        );
-}
-
-body.light .brand-logo,
-body.light .package-star,
-body.light .profile-avatar,
-body.light .modal-logo{
-    background:#f0f2f5;
-}
-
-/* =====================================================
-   RESPONSIVE
-   ===================================================== */
-
-@media(max-width:370px){
-
-    
+    <!-- HOME -->
+    <main id="home" class="page active">
+
+        <section class="hero">
+            <div class="hero-text">
+                <span class="small-title">TEZKOR XIZMAT</span>
+                <h1>Telegram Stars<br>oson va tez</h1>
+                <p>Kerakli xizmatni tanlang va buyurtma bering.</p>
+
+                <button class="main-btn" onclick="openPage('stars')">
+                    Stars sotib olish
+                    <span>→</span>
+                </button>
+            </div>
+
+            <div class="hero-icon">★</div>
+        </section>
+
+
+        <!-- BALANCE -->
+        <section class="balance-card">
+            <div>
+                <span>Balansingiz</span>
+                <strong id="balance">0 so'm</strong>
+            </div>
+
+            <button onclick="openPage('balance')">+</button>
+        </section>
+
+
+        <!-- STATS -->
+        <section class="stats">
+            <div class="stat-card">
+                <span>Stars</span>
+                <b>0</b>
+            </div>
+
+            <div class="stat-card">
+                <span>Premium</span>
+                <b>0</b>
+            </div>
+        </section>
+
+
+        <!-- SERVICES -->
+        <h3 class="section-title">Xizmatlar</h3>
+
+        <section class="services">
+
+            <button class="service-card" onclick="openPage('stars')">
+                <div class="service-icon stars-icon">★</div>
+                <strong>Stars</strong>
+                <span>Telegram Stars</span>
+            </button>
+
+            <button class="service-card" onclick="openPage('premium')">
+                <div class="service-icon premium-icon">P</div>
+                <strong>Premium</strong>
+                <span>Telegram Premium</span>
+            </button>
+
+            <button class="service-card" onclick="openPage('gift')">
+                <div class="service-icon gift-icon">G</div>
+                <strong>Gift</strong>
+                <span>Telegram Gift</span>
+            </button>
+
+            <button class="service-card" onclick="openPage('nft')">
+                <div class="service-icon nft-icon">N</div>
+                <strong>NFT</strong>
+                <span>Collectibles</span>
+            </button>
+
+            <button class="service-card" onclick="openPage('poststars')">
+                <div class="service-icon post-icon">✦</div>
+                <strong>Postga Stars</strong>
+                <span>Postga yuborish</span>
+            </button>
+
+            <button class="service-card" onclick="openPage('ton')">
+                <div class="service-icon ton-icon">T</div>
+                <strong>TON</strong>
+                <span>TON xizmatlari</span>
+            </button>
+
+            <button class="service-card" onclick="openPage('number')">
+                <div class="service-icon number-icon">#</div>
+                <strong>Raqam</strong>
+                <span>Telegram raqam</span>
+            </button>
+
+        </section>
+
+
+        <!-- GAMES -->
+        <h3 class="section-title">O'yinlar</h3>
+
+        <section class="games">
+
+            <button onclick="showToast('Savdo barabani tez orada')">
+                <span>◈</span>
+                <div>
+                    <strong>Savdo barabani</strong>
+                    <small>Omadingizni sinang</small>
+                </div>
+                <b>›</b>
+            </button>
+
+            <button onclick="showToast('Inventar tez orada')">
+                <span>◇</span>
+                <div>
+                    <strong>Inventar</strong>
+                    <small>Buyumlaringiz</small>
+                </div>
+                <b>›</b>
+            </button>
+
+            <button onclick="showToast('Bozor tez orada')">
+                <span>◆</span>
+                <div>
+                    <strong>Bozor</strong>
+                    <small>Almashish</small>
+                </div>
+                <b>›</b>
+            </button>
+
+            <button onclick="showToast('Konkurslar tez orada')">
+                <span>✧</span>
+                <div>
+                    <strong>Konkurslar</strong>
+                    <small>Sovrinlar</small>
+                </div>
+                <b>›</b>
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- STARS PAGE -->
+    <main id="stars" class="page service-page">
+
+        <div class="page-header">
+            <button onclick="goHome()">‹</button>
+            <div>
+                <h2>Telegram Stars</h2>
+                <span>Stars paketini tanlang</span>
+            </div>
+        </div>
+
+        <div class="service-banner stars-banner">
+            <div class="big-service-icon">★</div>
+            <div>
+                <h1>Stars</h1>
+                <p>Kerakli Stars miqdorini tanlang</p>
+            </div>
+        </div>
+
+        <h3 class="section-title">Stars paketlari</h3>
+
+        <div id="starsPackages" class="packages"></div>
+
+    </main>
+
+
+    <!-- PREMIUM PAGE -->
+    <main id="premium" class="page service-page">
+
+        <div class="page-header">
+            <button onclick="goHome()">‹</button>
+            <div>
+                <h2>Telegram Premium</h2>
+                <span>Premium tarifini tanlang</span>
+            </div>
+        </div>
+
+        <div class="service-banner premium-banner">
+            <div class="big-service-icon">P</div>
+            <div>
+                <h1>Premium</h1>
+                <p>Telegram Premium obunasi</p>
+            </div>
+        </div>
+
+        <h3 class="section-title">Premium paketlari</h3>
+
+        <div class="packages">
+
+            <button class="package" onclick="selectPremium('1 oy')">
+                <div>
+                    <strong>1 oy</strong>
+                    <span>Telegram Premium</span>
+                </div>
+                <b>Tanlash ›</b>
+            </button>
+
+            <button class="package" onclick="selectPremium('3 oy')">
+                <div>
+                    <strong>3 oy</strong>
+                    <span>Telegram Premium</span>
+                </div>
+                <b>Tanlash ›</b>
+            </button>
+
+            <button class="package" onclick="selectPremium('6 oy')">
+                <div>
+                    <strong>6 oy</strong>
+                    <span>Telegram Premium</span>
+                </div>
+                <b>Tanlash ›</b>
+            </button>
+
+            <button class="package" onclick="selectPremium('12 oy')">
+                <div>
+                    <strong>12 oy</strong>
+                    <span>Telegram Premium</span>
+                </div>
+                <b>Tanlash ›</b>
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <!-- OTHER SERVICE PAGES -->
+    <main id="gift" class="page service-page">
+        <div class="page-header">
+            <button onclick="goHome()">‹</button>
+            <div>
+                <h2>Gift</h2>
+                <span>Telegram Gift xizmatlari</span>
+            </div>
+        </div>
+
+        <div class="empty-service">
+            <div>G</div>
+            <h2>Gift</h2>
+            <p>Gift xizmatlari tez orada qo'shiladi.</p>
+        </div>
+    </main>
+
+
+    <main id="nft" class="page service-page">
+        <div class="page-header">
+            <button onclick="goHome()">‹</button>
+            <div>
+                <h2>NFT</h2>
+                <span>Telegram NFT</span>
+            </div>
+        </div>
+
+        <div class="empty-service">
+            <div>N</div>
+            <h2>NFT</h2>
+            <p>NFT xizmatlari tez orada qo'shiladi.</p>
+        </div>
+    </main>
+
+
+    <main id="poststars" class="page service-page">
+        <div class="page-header">
+            <button onclick="goHome()">‹</button>
+            <div>
+                <h2>Postga Stars</h2>
+                <span>Postga Stars yuborish</span>
+            </div>
+        </div>
+
+        <div class="empty-service">
+            <div>✦</div>
+            <h2>Postga Stars</h2>
+            <p>Ushbu xizmat tez orada ishga tushadi.</p>
+        </div>
+    </main>
+
+
+    <main id="ton" class="page service-page">
+        <div class="page-header">
+            <button onclick="goHome()">‹</button>
+            <div>
+                <h2>TON</h2>
+                <span>TON xizmatlari</span>
+            </div>
+        </div>
+
+        <div class="empty-service">
+            <div>T</div>
+            <h2>TON</h2>
+            <p>TON xizmatlari tez orada qo'shiladi.</p>
+        </div>
+    </main>
+
+
+    <main id="number" class="page service-page">
+        <div class="page-header">
+            <button onclick="goHome()">‹</button>
+            <div>
+                <h2>Raqam</h2>
+                <span>Telegram raqam xizmatlari</span>
+            </div>
+        </div>
+
+        <div class="empty-service">
+            <div>#</div>
+            <h2>Raqam</h2>
+            <p>Raqam xizmatlari tez orada qo'shiladi.</p>
+        </div>
+    </main>
+
+
+    <!-- ORDERS -->
+    <main id="orders" class="page">
+
+        <div class="simple-header">
+            <h2>Buyurtmalar</h2>
+            <span>Buyurtmalaringiz tarixi</span>
+        </div>
+
+        <div class="empty-service">
+            <div>≡</div>
+            <h2>Buyurtmalar yo'q</h2>
+            <p>Hozircha hech qanday buyurtma bermagansiz.</p>
+        </div>
+
+    </main>
+
+
+    <!-- BALANCE -->
+    <main id="balance-page" class="page">
+
+        <div class="simple-header">
+            <h2>Balans</h2>
+            <span>Hisobingiz</span>
+        </div>
+
+        <section class="balance-big">
+            <span>Joriy balans</span>
+            <strong id="bigBalance">0 so'm</strong>
+        </section>
+
+        <button class="main-btn full" onclick="showToast('To‘ldirish funksiyasi tez orada')">
+            Balansni to'ldirish
+            <span>→</span>
+        </button>
+
+    </main>
+
+
+    <!-- PROFILE -->
+    <main id="profile" class="page">
+
+        <div class="simple-header">
+            <h2>Profil</h2>
+            <span>Hisob ma'lumotlari</span>
+        </div>
+
+        <section class="profile-card">
+            <div id="profileAvatar" class="profile-avatar">X</div>
+
+            <div>
+                <strong id="profileName">Foydalanuvchi</strong>
+                <span id="profileUsername">@username</span>
+            </div>
+        </section>
+
+        <section class="profile-menu">
+            <button onclick="toggleTheme()">
+                <span>◐</span>
+                <div>
+                    <strong>Ko'rinish</strong>
+                    <small>Tungi / kunduzgi rejim</small>
+                </div>
+                <b>›</b>
+            </button>
+
+            <button onclick="showToast('Sozlamalar tez orada')">
+                <span>⚙</span>
+                <div>
+                    <strong>Sozlamalar</strong>
+                    <small>Ilova sozlamalari</small>
+                </div>
+                <b>›</b>
+            </button>
+        </section>
+
+    </main>
+
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav">
+
+        <button class="nav-item active" onclick="navigate('home', this)">
+            <span>⌂</span>
+            <small>Asosiy</small>
+        </button>
+
+        <button class="nav-item" onclick="navigate('orders', this)">
+            <span>≡</span>
+            <small>Buyurtma</small>
+        </button>
+
+        <button class="nav-item" onclick="navigate('balance-page', this)">
+            <span>◉</span>
+            <small>Balans</small>
+        </button>
+
+        <button class="nav-item" onclick="navigate('profile', this)">
+            <span>○</span>
+            <small>Profil</small>
+        </button>
+
+    </nav>
+
+</div>
+
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+
+<script src="app.js"></script>
+
+</body>
+   </html>
