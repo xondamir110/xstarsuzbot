@@ -1,49 +1,42 @@
-// ==========================================
-// X STARS UZ — APP.JS
-// ==========================================
+// ===============================
+// X STARS UZ - APP.JS
+// ===============================
 
-const tg = window.Telegram?.WebApp;
+const pages = [
+    "home",
+    "stars",
+    "premium",
+    "gift",
+    "nft",
+    "poststars",
+    "ton",
+    "number",
+    "orders",
+    "balance-page",
+    "profile"
+];
 
-// Telegram Web App
-if (tg) {
-    tg.ready();
-    tg.expand();
 
-    try {
-        tg.setHeaderColor("#08090b");
-        tg.setBackgroundColor("#08090b");
-    } catch (e) {}
+// ===============================
+// TELEGRAM
+// ===============================
+
+let tg = null;
+
+try {
+    if (window.Telegram && window.Telegram.WebApp) {
+        tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+    }
+} catch (error) {
+    console.log("Telegram WebApp:", error);
 }
 
 
-// ==========================================
-// TELEGRAM USER
-// ==========================================
-
-const telegramUser = tg?.initDataUnsafe?.user;
-
-const profileName = document.getElementById("profileName");
-const profileUsername = document.getElementById("profileUsername");
-
-if (telegramUser) {
-
-    if (profileName) {
-        profileName.textContent =
-            telegramUser.first_name || "Foydalanuvchi";
-    }
-
-    if (profileUsername) {
-        profileUsername.textContent =
-            telegramUser.username
-                ? "@" + telegramUser.username
-                : "Telegram foydalanuvchisi";
-    }
-}
-
-
-// ==========================================
+// ===============================
 // STARS PACKAGES
-// ==========================================
+// ===============================
 
 const starsPackages = [
     {
@@ -55,8 +48,8 @@ const starsPackages = [
         price: 22000
     },
     {
-        stars: 250,
-        price: 55000
+        stars: 200,
+        price: 44000
     },
     {
         stars: 500,
@@ -84,23 +77,211 @@ const starsPackages = [
     }
 ];
 
-let selectedStars = null;
 
+// ===============================
+// FORMAT PRICE
+// ===============================
 
-// ==========================================
-// PRICE FORMAT
-// ==========================================
-
-function formatPrice(price) {
-    return new Intl.NumberFormat("uz-UZ").format(price) + " so'm";
+function formatPrice(number) {
+    return Number(number).toLocaleString("uz-UZ") + " so'm";
 }
 
 
-// ==========================================
-// TOAST
-// ==========================================
+// ===============================
+// OPEN PAGE
+// ===============================
 
-function showNotice(message) {
+function openPage(pageName) {
+
+    pages.forEach(function(page) {
+
+        const element = document.getElementById(page);
+
+        if (element) {
+            element.classList.remove("active");
+        }
+
+    });
+
+    const selectedPage = document.getElementById(pageName);
+
+    if (selectedPage) {
+        selectedPage.classList.add("active");
+    }
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+
+    // Stars paketlarini yuklash
+    if (pageName === "stars") {
+        renderStars();
+    }
+
+
+    // Pastki navigatsiya
+    updateNavigation(pageName);
+}
+
+
+// ===============================
+// HOME
+// ===============================
+
+function goHome() {
+    openPage("home");
+
+    const navButtons = document.querySelectorAll(".nav-item");
+
+    navButtons.forEach(function(button) {
+        button.classList.remove("active");
+    });
+
+    if (navButtons[0]) {
+        navButtons[0].classList.add("active");
+    }
+}
+
+
+// ===============================
+// BOTTOM NAVIGATION
+// ===============================
+
+function navigate(pageName, button) {
+
+    openPage(pageName);
+
+    const navButtons = document.querySelectorAll(".nav-item");
+
+    navButtons.forEach(function(item) {
+        item.classList.remove("active");
+    });
+
+    if (button) {
+        button.classList.add("active");
+    }
+}
+
+
+function updateNavigation(pageName) {
+
+    const navButtons = document.querySelectorAll(".nav-item");
+
+    navButtons.forEach(function(item) {
+        item.classList.remove("active");
+    });
+
+    if (pageName === "home") {
+        if (navButtons[0]) {
+            navButtons[0].classList.add("active");
+        }
+    }
+
+    if (pageName === "orders") {
+        if (navButtons[1]) {
+            navButtons[1].classList.add("active");
+        }
+    }
+
+    if (pageName === "balance-page") {
+        if (navButtons[2]) {
+            navButtons[2].classList.add("active");
+        }
+    }
+
+    if (pageName === "profile") {
+        if (navButtons[3]) {
+            navButtons[3].classList.add("active");
+        }
+    }
+}
+
+
+// ===============================
+// STARS
+// ===============================
+
+function renderStars() {
+
+    const container = document.getElementById("starsPackages");
+
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    starsPackages.forEach(function(item) {
+
+        const button = document.createElement("button");
+
+        button.className = "package";
+
+        button.innerHTML = `
+            <div>
+                <div class="package-star">★</div>
+
+                <div>
+                    <strong>${item.stars.toLocaleString("uz-UZ")} Stars</strong>
+                    <span>Telegram Stars</span>
+                </div>
+            </div>
+
+            <b>${formatPrice(item.price)}</b>
+        `;
+
+        button.addEventListener("click", function() {
+            selectStars(item.stars, item.price);
+        });
+
+        container.appendChild(button);
+    });
+}
+
+
+// ===============================
+// SELECT STARS
+// ===============================
+
+function selectStars(stars, price) {
+
+    showToast(
+        stars.toLocaleString("uz-UZ") +
+        " Stars — " +
+        formatPrice(price)
+    );
+
+    /*
+        Keyinchalik shu joyga real buyurtma
+        va to'lov tizimi ulanadi.
+    */
+}
+
+
+// ===============================
+// PREMIUM
+// ===============================
+
+function selectPremium(period) {
+
+    showToast(
+        "Premium " + period + " tanlandi"
+    );
+
+    /*
+        Keyinchalik Premium buyurtma
+        funksiyasi shu yerga ulanadi.
+    */
+}
+
+
+// ===============================
+// TOAST
+// ===============================
+
+let toastTimer = null;
+
+function showToast(message) {
 
     const toast = document.getElementById("toast");
 
@@ -110,562 +291,276 @@ function showNotice(message) {
 
     toast.classList.add("show");
 
-    setTimeout(() => {
+    clearTimeout(toastTimer);
+
+    toastTimer = setTimeout(function() {
         toast.classList.remove("show");
     }, 2200);
 }
 
 
-// ==========================================
-// NAVIGATION
-// ==========================================
+// ===============================
+// THEME
+// ===============================
 
-function navigate(page, button) {
+function toggleTheme() {
 
-    const orders = document.getElementById("orders");
-    const profile = document.getElementById("profile");
+    const isLight =
+        document.body.classList.contains("light");
 
-    // Home content
-    const homeSections = document.querySelectorAll(
-        ".topbar, .hero, .balance-card, .stats, .section"
-    );
-
-    // Hide pages
-    if (orders) {
-        orders.classList.add("hidden");
+    if (isLight) {
+        setTheme("dark");
+    } else {
+        setTheme("light");
     }
+}
 
-    if (profile) {
-        profile.classList.add("hidden");
-    }
 
-    // Hide/show home
-    if (page === "home") {
+function setTheme(theme) {
 
-        homeSections.forEach(section => {
-            section.style.display = "";
-        });
+    if (theme === "light") {
+
+        document.body.classList.add("light");
+
+        localStorage.setItem(
+            "xstars-theme",
+            "light"
+        );
 
     } else {
 
-        homeSections.forEach(section => {
-            section.style.display = "none";
-        });
-    }
-
-
-    // Orders
-    if (page === "orders" && orders) {
-        orders.classList.remove("hidden");
-    }
-
-
-    // Profile
-    if (page === "profile" && profile) {
-        profile.classList.remove("hidden");
-    }
-
-
-    // Balance
-    if (page === "balance") {
-
-        homeSections.forEach(section => {
-            section.style.display = "none";
-        });
-
-        showNotice("Balans bo'limi");
-    }
-
-
-    // Active navigation
-    document.querySelectorAll(".nav").forEach(nav => {
-        nav.classList.remove("active");
-    });
-
-    if (button) {
-        button.classList.add("active");
-    }
-}
-
-
-// ==========================================
-// SERVICES
-// ==========================================
-
-const services = {
-
-    premium: {
-        title: "Premium",
-        description: "Telegram Premium obunasini tanlang",
-        logo: "♛"
-    },
-
-    gift: {
-        title: "Gift",
-        description: "Telegram sovg'alarini tanlang",
-        logo: "◇"
-    },
-
-    nft: {
-        title: "NFT",
-        description: "NFT kolleksiyalari",
-        logo: "◆"
-    },
-
-    poststars: {
-        title: "Postga Stars",
-        description: "Postga Stars yuborish",
-        logo: "✦"
-    },
-
-    ton: {
-        title: "TON",
-        description: "TON xizmatlari",
-        logo: "△"
-    },
-
-    number: {
-        title: "Raqam",
-        description: "Virtual raqamlar",
-        logo: "▯"
-    }
-};
-
-
-// ==========================================
-// OPEN PAGE
-// ==========================================
-
-function openPage(serviceName) {
-
-    // Stars
-    if (serviceName === "stars") {
-        openStars();
-        return;
-    }
-
-    const service = services[serviceName];
-
-    if (!service) return;
-
-    const modal = document.getElementById("serviceModal");
-    const logo = document.getElementById("modalLogo");
-    const title = document.getElementById("modalTitle");
-    const description = document.getElementById("modalDescription");
-    const content = document.getElementById("modalContent");
-
-    if (!modal) return;
-
-
-    if (logo) {
-        logo.textContent = service.logo;
-    }
-
-    if (title) {
-        title.textContent = service.title;
-    }
-
-    if (description) {
-        description.textContent = service.description;
-    }
-
-    if (content) {
-
-        content.innerHTML = `
-            <div class="empty-state">
-                <div class="empty-icon">${service.logo}</div>
-
-                <h3>Tez orada</h3>
-
-                <p>
-                    Bu xizmat hozircha ishlab chiqilmoqda.
-                </p>
-            </div>
-        `;
-    }
-
-
-    modal.classList.remove("hidden");
-    modal.classList.add("active");
-}
-
-
-// ==========================================
-// OPEN STARS
-// ==========================================
-
-function openStars() {
-
-    const modal = document.getElementById("serviceModal");
-    const logo = document.getElementById("modalLogo");
-    const title = document.getElementById("modalTitle");
-    const description = document.getElementById("modalDescription");
-    const content = document.getElementById("modalContent");
-
-    if (!modal || !content) return;
-
-
-    if (logo) {
-        logo.innerHTML = `
-            <svg viewBox="0 0 100 100"
-                 width="48"
-                 height="48"
-                 style="display:block">
-
-                <defs>
-                    <linearGradient
-                        id="starsGold"
-                        x1="0"
-                        y1="0"
-                        x2="1"
-                        y2="1">
-
-                        <stop offset="0%"
-                              stop-color="#fff3a0"/>
-
-                        <stop offset="45%"
-                              stop-color="#ffd21c"/>
-
-                        <stop offset="100%"
-                              stop-color="#ff9d00"/>
-                    </linearGradient>
-                </defs>
-
-                <path
-                    d="M50 4
-                       L61 37
-                       L96 38
-                       L68 59
-                       L79 93
-                       L50 72
-                       L21 93
-                       L32 59
-                       L4 38
-                       L39 37 Z"
-
-                    fill="url(#starsGold)"
-                />
-            </svg>
-        `;
-    }
-
-
-    if (title) {
-        title.textContent = "Stars";
-    }
-
-
-    if (description) {
-        description.textContent =
-            "Telegram Stars sotib oling";
-    }
-
-
-    // Packages
-    content.innerHTML = `
-
-        <div class="stars-packages">
-
-            ${starsPackages.map((item, index) => `
-
-                <button
-                    class="stars-package ${index === 3 ? "popular" : ""}"
-                    onclick="selectStars(${item.stars}, this)"
-                >
-
-                    ${
-                        index === 3
-                            ? `<span class="popular-badge">
-                                Mashhur
-                               </span>`
-                            : ""
-                    }
-
-
-                    <div class="package-star">
-
-                        <svg viewBox="0 0 100 100">
-
-                            <defs>
-                                <linearGradient
-                                    id="packageGold${index}"
-                                    x1="0"
-                                    y1="0"
-                                    x2="1"
-                                    y2="1">
-
-                                    <stop offset="0%"
-                                          stop-color="#fff3a0"/>
-
-                                    <stop offset="50%"
-                                          stop-color="#ffd21c"/>
-
-                                    <stop offset="100%"
-                                          stop-color="#ff9d00"/>
-                                </linearGradient>
-                            </defs>
-
-
-                            <path
-                                d="M50 4
-                                   L61 37
-                                   L96 38
-                                   L68 59
-                                   L79 93
-                                   L50 72
-                                   L21 93
-                                   L32 59
-                                   L4 38
-                                   L39 37 Z"
-
-                                fill="url(#packageGold${index})"
-                            />
-
-                        </svg>
-
-                    </div>
-
-
-                    <div class="package-info">
-
-                        <strong>
-                            ${item.stars.toLocaleString("uz-UZ")}
-                            Stars
-                        </strong>
-
-                        <span>
-                            ${formatPrice(item.price)}
-                        </span>
-
-                    </div>
-
-
-                    <div class="package-arrow">
-                        →
-                    </div>
-
-                </button>
-
-            `).join("")}
-
-        </div>
-
-
-        <div
-            style="
-                text-align:center;
-                margin:16px 0;
-                color:#8b9098;
-                font-size:13px;
-            "
-        >
-            Maksimal buyurtma:
-            <b style="color:#ffd21c">
-                5000 Stars
-            </b>
-        </div>
-
-
-        <button
-            id="buyStarsButton"
-            onclick="buyStars()"
-            disabled
-            style="
-                width:100%;
-                border:0;
-                border-radius:18px;
-                padding:17px;
-                background:#ffd21c;
-                color:#08090b;
-                font-size:16px;
-                font-weight:800;
-                opacity:.5;
-                cursor:pointer;
-            "
-        >
-            Stars paketini tanlang
-        </button>
-
-    `;
-
-
-    modal.classList.remove("hidden");
-    modal.classList.add("active");
-
-    selectedStars = null;
-}
-
-
-// ==========================================
-// SELECT STARS
-// ==========================================
-
-function selectStars(stars, element) {
-
-    selectedStars = stars;
-
-
-    // Remove old selection
-    document
-        .querySelectorAll(".stars-package")
-        .forEach(card => {
-            card.classList.remove("selected");
-        });
-
-
-    // Select current
-    if (element) {
-        element.classList.add("selected");
-    }
-
-
-    const packageData = starsPackages.find(
-        item => item.stars === stars
-    );
-
-    const button =
-        document.getElementById("buyStarsButton");
-
-
-    if (!button || !packageData) return;
-
-
-    button.disabled = false;
-
-    button.style.opacity = "1";
-
-
-    button.innerHTML = `
-        ${stars.toLocaleString("uz-UZ")} Stars
-        — ${formatPrice(packageData.price)}
-    `;
-
-
-    // Haptic
-    try {
-        tg?.HapticFeedback?.impactOccurred("light");
-    } catch (e) {}
-}
-
-
-// ==========================================
-// BUY STARS
-// ==========================================
-
-function buyStars() {
-
-    if (!selectedStars) {
-
-        showNotice(
-            "Avval Stars paketini tanlang"
+        document.body.classList.remove("light");
+
+        localStorage.setItem(
+            "xstars-theme",
+            "dark"
         );
-
-        return;
     }
+}
 
 
-    const packageData = starsPackages.find(
-        item => item.stars === selectedStars
-    );
+// ===============================
+// LOAD THEME
+// ===============================
+
+function loadTheme() {
+
+    const savedTheme =
+        localStorage.getItem("xstars-theme");
+
+    if (savedTheme === "light") {
+        setTheme("light");
+    } else {
+        setTheme("dark");
+    }
+}
 
 
-    if (!packageData) return;
+// ===============================
+// TELEGRAM USER
+// ===============================
 
-
-    showNotice(
-        `${selectedStars.toLocaleString("uz-UZ")} Stars tanlandi`
-    );
-
+function loadTelegramUser() {
 
     try {
-        tg?.HapticFeedback?.notificationOccurred(
-            "success"
+
+        if (
+            !tg ||
+            !tg.initDataUnsafe ||
+            !tg.initDataUnsafe.user
+        ) {
+            return;
+        }
+
+        const user = tg.initDataUnsafe.user;
+
+        const profileName =
+            document.getElementById("profileName");
+
+        const profileUsername =
+            document.getElementById("profileUsername");
+
+        const profileAvatar =
+            document.getElementById("profileAvatar");
+
+
+        let fullName = "";
+
+        if (user.first_name) {
+            fullName += user.first_name;
+        }
+
+        if (user.last_name) {
+            fullName += " " + user.last_name;
+        }
+
+        if (!fullName) {
+            fullName = "Foydalanuvchi";
+        }
+
+
+        if (profileName) {
+            profileName.textContent = fullName;
+        }
+
+
+        if (profileUsername) {
+
+            if (user.username) {
+                profileUsername.textContent =
+                    "@" + user.username;
+            } else {
+                profileUsername.textContent =
+                    "Telegram foydalanuvchisi";
+            }
+
+        }
+
+
+        if (profileAvatar) {
+
+            if (user.first_name) {
+                profileAvatar.textContent =
+                    user.first_name
+                        .charAt(0)
+                        .toUpperCase();
+            }
+
+        }
+
+    } catch (error) {
+
+        console.log(
+            "User ma'lumotlarini olishda xatolik:",
+            error
         );
-    } catch (e) {}
 
-
-    /*
-        MUHIM:
-
-        Hozir bu faqat UI.
-
-        Keyingi bosqichda bu yerga:
-        - buyurtma yaratish
-        - to'lov
-        - backend
-        - Telegram Stars yetkazib berish
-
-        ulanadi.
-    */
-}
-
-
-// ==========================================
-// CLOSE MODAL
-// ==========================================
-
-function closeModal() {
-
-    const modal =
-        document.getElementById("serviceModal");
-
-    if (!modal) return;
-
-
-    modal.classList.remove("active");
-    modal.classList.add("hidden");
-
-
-    selectedStars = null;
-}
-
-
-// ==========================================
-// MODAL BACKGROUND
-// ==========================================
-
-document.addEventListener("click", function(event) {
-
-    const modal =
-        document.getElementById("serviceModal");
-
-    if (!modal) return;
-
-
-    if (event.target === modal) {
-        closeModal();
     }
-});
-
-
-// ==========================================
-// ESC
-// ==========================================
-
-document.addEventListener("keydown", function(event) {
-
-    if (event.key === "Escape") {
-        closeModal();
-    }
-
-});
-
-
-// ==========================================
-// START
-// ==========================================
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    // Home
-    document.querySelectorAll(".nav").forEach(nav => {
-        nav.classList.remove("active");
-    });
-
-    const homeNav = document.querySelector(
-        '.nav[onclick*="home"]'
-    );
-
-    if (homeNav) {
-        homeNav.classList.add("active");
 }
+
+
+// ===============================
+// TELEGRAM BACK BUTTON
+// ===============================
+
+function setupTelegramBackButton() {
+
+    try {
+
+        if (!tg || !tg.BackButton) {
+            return;
+        }
+
+        tg.BackButton.onClick(function() {
+            goHome();
+            tg.BackButton.hide();
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+// ===============================
+// PAGE OPEN WATCHER
+// ===============================
+
+function showBackButton() {
+
+    try {
+
+        if (!tg || !tg.BackButton) {
+            return;
+        }
+
+        const currentPage =
+            document.querySelector(".page.active");
+
+        if (!currentPage) return;
+
+        if (currentPage.id === "home") {
+            tg.BackButton.hide();
+        } else {
+            tg.BackButton.show();
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+// ===============================
+// CLICK EFFECT
+// ===============================
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const button =
+            event.target.closest("button");
+
+        if (!button) return;
+
+        button.style.transform = "scale(0.97)";
+
+        setTimeout(function() {
+
+            button.style.transform = "";
+
+        }, 100);
+
+    }
+);
+
+
+// ===============================
+// INIT
+// ===============================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        loadTheme();
+
+        loadTelegramUser();
+
+        setupTelegramBackButton();
+
+        renderStars();
+
+        openPage("home");
+
+        console.log(
+            "X Stars Uz successfully loaded."
+        );
+    }
+);
+
+
+// ===============================
+// PREVENT BROKEN LINKS
+// ===============================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        document.querySelectorAll(
+            'a[href="#"]'
+        ).forEach(function(link) {
+
+            link.addEventListener(
+                "click",
+                function(event) {
+                    event.preventDefault();
+                }
+            );
+
+        });
+
+    }
+);
